@@ -45,6 +45,15 @@ a, a:hover {
 	text-decoration: none;
 }
 
+.background-bubbles {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: -1;
+	width: 570px;
+	opacity: 0.8;
+}
+
 main {
 	display: flex;
 	height: 100%;
