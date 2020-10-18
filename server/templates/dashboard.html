@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Aural | Dashboard</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+		<script src="https://kit.fontawesome.com/cf30b19bdf.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<img src="{{ url_for('static', filename='images/redbubbles.svg') }}" class="background-bubbles">
+		<main>
+			<!-- Left sidebar-->
+			<section class="left-sidebar">
+				<div class="left-sidebar-gist">
+					<div class="logo-wrapper">
+						<img class="logo" src="{{ url_for('static', filename='images/logo.png') }}"/>
+					</div>
+
+					<ul class="left-sidebar-nav">
+						<li><a href="/nowhere"><i class="fas fa-microphone-alt"></i> My Voice Commands</a></li>
+						<li><a href="/nowhere"><i class="fas fa-credit-card"></i> Create Voice Card</a></li>
+						<li><a href="/nowhere"><i class="fas fa-list-ul"></i> Last Voice Transactions</a></li>
+						<li><a href="/nowhere"><i class="fas fa-plus-circle"></i> Create Voice Command</a></li>
+						<li><a href="/nowhere"><i class="fas fa-phone-volume"></i> Personalize Voice Commands</a></li>
+						<li><a href="/nowhere"><i class="fas fa-user-circle"></i> Open Additional Account</a></li>
+					</ul>
+				</div>
+
+				<footer class="left-sidebar-footer">
+					<ul>
+						<li class="left-sidebar-footer-first"><a href="/nowhere">LOGO, Inc &trade;</a></li>
+						<li><a href="/nowhere"><i class="far fa-address-book ls-icons"></i> Contact</a></li>
+						<li><a href="/nowhere"><i class="fas fa-question-circle ls-icons"></i> LOGO Support</a></li>
+						<li><a href="/nowhere"><i class="fas fa-video ls-icons"></i> Press</a></li>
+					</ul>
+				</footer>
+			</section>
+
+			<section class="main-content">
+
+				<!-- Header of main content (top navbar) -->
+				<header class="main-content-header">
+					<div class="main-content-header-gist">
+
+						<div class="user-area">
+							<img src="{{ url_for('static', filename='images/user.png') }}" class="user-profile-image" />
+							<div>
+								<p class="user-text-one">Nate Wilk</p>
+								<p class="user-text-two">Software Engineer</p>
+							</div>
+						</div>
+						<input type="text" class="top-input"/>
+						<button class="search-btn">Search</button>
+					</div>
+
+					<ul class="nav">
+						<li><a href="/nowhere"><i class="fas fa-user-circle"></i> Voice Accounts</a></li>
+						<li><a href="/nowhere"><i class="fas fa-cart-plus"></i> Voice Cards</a></li>
+						<li><a href="/nowhere"><i class="fas fa-file-code"></i> Development</a></li>
+					</ul>
+				</header>
+
+				<!-- Main content under top navbar -->
+				<section class="content-wrapper">
+
+					<div class="content-wrapper-gist">
+						<div class="content-one">
+							<header>
+								<p class="header-txt-one">Balance</p>
+								<p class="header-txt-two">Checking account</p>
+							</header>
+							<p class="balance-value"><span class="dollar-sign">$</span> 40,135.89</p>
+							<div class="content-one-gist">
+								<header>
+									<p class="header-txt-one">Last transactions</p>
+								</header>
+								<ul>
+									<li>
+										<div class="transaction-item">
+											<div class="transaction-item-gist">
+												<img src="{{ url_for('static', filename='images/netflix_logo.png') }}" class="ti-icon">
+												<div class="transaction-item-gist-text">
+													<p class="transaction-item-text-one">Netflix Inc.</p>
+													<p class="transaction-item-text-two">Monthly subscription</p>
+												</div>
+											</div>
+											<p class="transaction-item-price">$15.99</p>
+										</div>
+										<div class="transaction-item">
+											<div class="transaction-item-gist">
+												<img src="{{ url_for('static', filename='images/john.png') }}" class="ti-icon">
+												<div class="transaction-item-gist-text">
+													<p class="transaction-item-text-one">Johnny Blake</p>
+													<p class="transaction-item-text-two">Orlando, FL</p>
+												</div>
+											</div>
+											<p class="transaction-item-price">$150.00</p>
+										</div>
+										<div class="transaction-item">
+											<div class="transaction-item-gist">
+												<img src="{{ url_for('static', filename='images/spotify_logo.png') }}" class="ti-icon">
+												<div class="transaction-item-gist-text">
+													<p class="transaction-item-text-one">Netflix Inc.</p>
+													<p class="transaction-item-text-two">Monthly subscription</p>
+												</div>
+											</div>
+											<p class="transaction-item-price">$9.99</p>
+										</div>
+										<div class="transaction-item">
+											<div class="transaction-item-gist">
+												<img src="{{ url_for('static', filename='images/mary.png') }}" class="ti-icon">
+												<div class="transaction-item-gist-text">
+													<p class="transaction-item-text-one">Alyssa Davidson</p>
+													<p class="transaction-item-text-two">Recurring payments</p>
+												</div>
+											</div>
+											<p class="transaction-item-price">$2,800.10</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="content-two">
+							<header>
+								<p class="header-txt-one">Voice Commands</p>
+								<p class="header-txt-two">Here, you can perform bank transactions using voice commands</p>
+							</header>
+							<div class="content-two-gist">
+								<button class="audio-btn">
+									<span>Talk</span>
+								</button>
+								<img src="{{ url_for('static', filename='images/cardbrowser.png') }}" class="card" />
+							</div>
+						</div>
+					</div>
+
+					<div class="content-three">
+
+						<div class="content-three-gist">
+							<button class="black-btn">See credit card</button>
+							<button class="black-btn">Open wallet</button>
+						</div>
+					</div>
+
+				</section>
+			</section>
+		</main>
+		<script>
+			// Audio animation.
+			const audioBtn = document.querySelector(".audio-btn");
+			let buttonActivated = false;
+			let intervalId = null;
+
+			audioBtn.addEventListener("click", () => {
+
+				if (!buttonActivated) {
+					intervalId = setInterval(() => {
+						audioBtn.querySelector("span").innerHTML = "Stop";
+						audioBtn.classList.toggle("expand");
+						buttonActivated = true;
+					}, 500);
+				}
+
+				if (buttonActivated) {
+					buttonActivated = false;
+					audioBtn.querySelector("span").innerHTML = "Talk";
+					clearInterval(intervalId);
+					audioBtn.classList.remove("expand");
+				}
+			});
+
+		</script>
+	</body>
+</html>
