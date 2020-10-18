@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Aural | Dashboard</title>
+		<title>The Aural Card | Dashboard </title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 		<script src="https://kit.fontawesome.com/cf30b19bdf.js" crossorigin="anonymous"></script>
 	</head>
@@ -28,9 +28,9 @@
 
 				<footer class="left-sidebar-footer">
 					<ul>
-						<li class="left-sidebar-footer-first"><a href="/nowhere">LOGO, Inc &trade;</a></li>
+						<li class="left-sidebar-footer-first"><a href="/nowhere">The Aural Card, Inc &trade;</a></li>
 						<li><a href="/nowhere"><i class="far fa-address-book ls-icons"></i> Contact</a></li>
-						<li><a href="/nowhere"><i class="fas fa-question-circle ls-icons"></i> LOGO Support</a></li>
+						<li><a href="/nowhere"><i class="fas fa-question-circle ls-icons"></i> The Aural Card Support</a></li>
 						<li><a href="/nowhere"><i class="fas fa-video ls-icons"></i> Press</a></li>
 					</ul>
 				</footer>
@@ -69,13 +69,38 @@
 								<p class="header-txt-one">Balance</p>
 								<p class="header-txt-two">Checking account</p>
 							</header>
-							<p class="balance-value"><span class="dollar-sign">$</span> 40,135.89</p>
+							<p class="balance-value"><span class="dollar-sign">$</span> <span id='moeny'>40,135.89</span></p>
 							<div class="content-one-gist">
 								<header>
 									<p class="header-txt-one">Last transactions</p>
 								</header>
 								<ul>
 									<li>
+										<div id='hiddent2' style="display:none">
+											<div class="transaction-item">
+												<div class="transaction-item-gist">
+													<img src="{{ url_for('static', filename='images/john.png') }}" class="ti-icon">
+													<div class="transaction-item-gist-text">
+														<p class="transaction-item-text-one">Transfer to Dave</p>
+														<p class="transaction-item-text-two">Transfer</p>
+													</div>
+												</div>
+												<p class="transaction-item-price">$40.00</p>
+											</div>
+										</div>
+										<div id='hiddent' style="display:none">
+											<div class="transaction-item">
+												<div class="transaction-item-gist">
+													<img src="{{ url_for('static', filename='images/user.png') }}" class="ti-icon">
+													<div class="transaction-item-gist-text">
+														<p class="transaction-item-text-one">Personal Withdraw</p>
+														<p class="transaction-item-text-two">Withdraw</p>
+													</div>
+												</div>
+												<p class="transaction-item-price">$20.00</p>
+											</div>
+										</div>
+
 										<div class="transaction-item">
 											<div class="transaction-item-gist">
 												<img src="{{ url_for('static', filename='images/netflix_logo.png') }}" class="ti-icon">
@@ -130,8 +155,8 @@
 								<button class="audio-btn">
 									<span>Talk</span>
 								</button>
-								<img src="{{ url_for('static', filename='images/cardbrowser.png') }}" class="card" />
 							</div>
+							<img src="{{ url_for('static', filename='images/cardbrowser.png') }}" class="card" />
 						</div>
 					</div>
 
@@ -147,10 +172,51 @@
 			</section>
 		</main>
 		<script>
+		withdraw_h = document.getElementById("hiddent");
+		transfers = document.getElementById("hiddent2");
+
+		money = document.getElementById("moeny")
+
+		var recognition = new webkitSpeechRecognition();
+		let amt = 40135.89;
 			// Audio animation.
 			const audioBtn = document.querySelector(".audio-btn");
 			let buttonActivated = false;
 			let intervalId = null;
+			let start = false;
+
+			const synth = window.speechSynthesis;
+
+			recognition.onresult = function(event) {
+				console.log(event.results[0][0].transcript)
+				word = event.results[0][0].transcript.split(" ")
+
+				if(word[0] == "withdraw"){
+					withdraw_h.style.display = "block";
+					money.innerHTML = "40,115.89";
+					const utter = new SpeechSynthesisUtterance("We have withdrawn 20 dollars from your account!");
+					synth.speak(utter) //TTS
+				}
+				if(word[0] == "deposit"){
+					money.innerHTML = "40,145.89";
+					const utter = new SpeechSynthesisUtterance("We deposited 30 dollars in your account!");
+					synth.speak(utter) //TTS
+				}
+				if(word[0] == "transfer"){
+					transfers.style.display = "block";
+					money.innerHTML = "40,105.89";
+					const utter = new SpeechSynthesisUtterance("We transfered 40 dollars from your account to Dave!");
+					synth.speak(utter) //TTS
+				}
+
+
+				buttonActivated = false;
+				audioBtn.querySelector("span").innerHTML = "Talk";
+				clearInterval(intervalId);
+				audioBtn.classList.remove("expand");
+				start = false;
+				// start = false;
+			}
 
 			audioBtn.addEventListener("click", () => {
 
@@ -158,6 +224,11 @@
 					intervalId = setInterval(() => {
 						audioBtn.querySelector("span").innerHTML = "Stop";
 						audioBtn.classList.toggle("expand");
+						if(!start){
+							recognition.start();
+							start = true;
+						}
+
 						buttonActivated = true;
 					}, 500);
 				}

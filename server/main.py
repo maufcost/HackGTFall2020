@@ -66,9 +66,9 @@ def make_transaction(auth, fromAccountHolderId, fromAccountId, toAccountId):
 
 @app.route('/')
 def root():
-    token = oauth_ncr()
-    accs = get_all_accs(token)
-    print(accs)
+    #token = oauth_ncr()
+    #accs = get_all_accs(token)
+    #print(accs)
     return render_template("dashboard.html")
     #jsonify({"status":"200"})
 

@@ -96,6 +96,8 @@ main {
 	left: 0;
 	right: 0;
 	padding: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
 }
 
 .left-sidebar-footer a {
@@ -111,7 +113,7 @@ main {
 }
 
 .logo {
-	width: 60px;
+	width: 128px;
 }
 
 .left-sidebar-footer-first {
@@ -302,18 +304,18 @@ main {
 	padding: 10px;
 	border: 1px solid var(--std-grey-hover);
 	box-shadow: 0 5px 2px var(--std-grey-hover);
-}
-
-.content-two-gist {
 	position: relative;
 }
 
 .card {
 	width: 300px;
 	position: absolute;
-	bottom: -300px;
+	bottom: -100px;
 	display: block;
-	left: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
 }
 
 .content-three-gist {
@@ -348,8 +350,7 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 50px;
-	margin: 50px auto;
+	margin: 80px auto;
 }
 
 .audio-btn:hover {

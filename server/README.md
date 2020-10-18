@@ -1,1 +1,1 @@
-"# KnightHacks submission" 
+"# HackGT submission" 
