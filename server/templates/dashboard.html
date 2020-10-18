@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Aural Card | Dashboard</title>
+		<title>Aural | Dashboard</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 		<script src="https://kit.fontawesome.com/cf30b19bdf.js" crossorigin="anonymous"></script>
 	</head>
@@ -13,17 +13,16 @@
 			<section class="left-sidebar">
 				<div class="left-sidebar-gist">
 					<div class="logo-wrapper">
-						<p class="logo">Aural Card</p>
+						<img class="logo" src="{{ url_for('static', filename='images/logo.png') }}"/>
 					</div>
 
 					<ul class="left-sidebar-nav">
-						<li><a href="/nowhere">My Voice Commands</a></li>
-						<li><a href="/nowhere">Create Voice Card</a></li>
-						<li><a href="/nowhere">Last Voice Transactions</a></li>
-						<li><a href="/nowhere">Create Voice Command</a></li>
-						<li><a href="/nowhere">Personalize Voice Commands</a></li>
-						<li><a href="/nowhere">Accounts</a></li>
-						<li><a href="/nowhere">Open Additional Account</a></li>
+						<li><a href="/nowhere"><i class="fas fa-microphone-alt"></i> My Voice Commands</a></li>
+						<li><a href="/nowhere"><i class="fas fa-credit-card"></i> Create Voice Card</a></li>
+						<li><a href="/nowhere"><i class="fas fa-list-ul"></i> Last Voice Transactions</a></li>
+						<li><a href="/nowhere"><i class="fas fa-plus-circle"></i> Create Voice Command</a></li>
+						<li><a href="/nowhere"><i class="fas fa-phone-volume"></i> Personalize Voice Commands</a></li>
+						<li><a href="/nowhere"><i class="fas fa-user-circle"></i> Open Additional Account</a></li>
 					</ul>
 				</div>
 
@@ -42,17 +41,22 @@
 				<!-- Header of main content (top navbar) -->
 				<header class="main-content-header">
 					<div class="main-content-header-gist">
-						<img src="{{ url_for('static', filename='images/user.png') }}" class="user-profile-image" />
+
+						<div class="user-area">
+							<img src="{{ url_for('static', filename='images/user.png') }}" class="user-profile-image" />
+							<div>
+								<p class="user-text-one">Nate Wilk</p>
+								<p class="user-text-two">Software Engineer</p>
+							</div>
+						</div>
 						<input type="text" class="top-input"/>
 						<button class="search-btn">Search</button>
 					</div>
 
 					<ul class="nav">
-						<li><a href="/nowhere">link</a></li>
-						<li><a href="/nowhere">link</a></li>
-						<li><a href="/nowhere">link</a></li>
-						<li><a href="/nowhere">link</a></li>
-						<li><a href="/nowhere">link</a></li>
+						<li><a href="/nowhere"><i class="fas fa-user-circle"></i> Voice Accounts</a></li>
+						<li><a href="/nowhere"><i class="fas fa-cart-plus"></i> Voice Cards</a></li>
+						<li><a href="/nowhere"><i class="fas fa-file-code"></i> Development</a></li>
 					</ul>
 				</header>
 
@@ -122,6 +126,12 @@
 								<p class="header-txt-one">Voice Commands</p>
 								<p class="header-txt-two">Here, you can perform bank transactions using voice commands</p>
 							</header>
+							<div class="content-two-gist">
+								<button class="audio-btn">
+									<span>Talk</span>
+								</button>
+								<img src="{{ url_for('static', filename='images/cardbrowser.png') }}" class="card" />
+							</div>
 						</div>
 					</div>
 
@@ -136,5 +146,30 @@
 				</section>
 			</section>
 		</main>
+		<script>
+			// Audio animation.
+			const audioBtn = document.querySelector(".audio-btn");
+			let buttonActivated = false;
+			let intervalId = null;
+
+			audioBtn.addEventListener("click", () => {
+
+				if (!buttonActivated) {
+					intervalId = setInterval(() => {
+						audioBtn.querySelector("span").innerHTML = "Stop";
+						audioBtn.classList.toggle("expand");
+						buttonActivated = true;
+					}, 500);
+				}
+
+				if (buttonActivated) {
+					buttonActivated = false;
+					audioBtn.querySelector("span").innerHTML = "Talk";
+					clearInterval(intervalId);
+					audioBtn.classList.remove("expand");
+				}
+			});
+
+		</script>
 	</body>
 </html>
